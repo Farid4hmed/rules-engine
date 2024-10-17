@@ -23,11 +23,9 @@ def evaluate_condition(data, field, operator, value):
     data_value = data[field]
 
     try:
-        # Attempt to convert both data_value and value to floats
         data_value = float(data_value)
         value = float(value)
     except ValueError:
-        # If conversion fails, compare as strings
         data_value = str(data_value)
         value = str(value)
 

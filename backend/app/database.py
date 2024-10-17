@@ -7,7 +7,7 @@ load_dotenv()
 
 MONGO_URI = os.getenv('MONGO_URI', 'mongodb://localhost:27017/')
 client = MongoClient(MONGO_URI)
-db = client['rule_engine_db']
+db = client['rules_engine']
 rules_collection = db['rules']
 
 def insert_rule(rule_data):
