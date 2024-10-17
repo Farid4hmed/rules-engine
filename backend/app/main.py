@@ -41,3 +41,12 @@ def combine_rules(input_data: CombineRulesInput):
     }
     combined_rule_id = insert_rule(rule_data)
     return {'message': 'Rules combined', 'combined_rule_id': str(combined_rule_id)}
+
+
+@app.post('/evaluate_rule')
+def evaluate_rule(input_data: EvaluateRuleInput):
+    rule = get_rule(input_data.rule_id)
+    if not rule:
+        raise HTTPException(status_code=404, detail="Rule not found")
+    result = evaluate_ast(rule['ast'], input_data.user_data)
+    return {'eligible': result}
