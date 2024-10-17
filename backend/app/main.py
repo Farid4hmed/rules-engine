@@ -25,3 +25,19 @@ def create_rule(rule_input: RuleInput):
         return {'message': 'Rule created', 'rule_id': str(rule_id)}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+    
+
+@app.post('/combine_rules')
+def combine_rules(input_data: CombineRulesInput):
+    rules = get_rules(input_data.rule_ids)
+    if not rules:
+        raise HTTPException(status_code=404, detail="No rules found")
+    asts = [rule['ast'] for rule in rules]
+    combined_ast = combine_asts(asts)
+    rule_data = {
+        'rule_string': None,
+        'ast': combined_ast,
+        'combined': True
+    }
+    combined_rule_id = insert_rule(rule_data)
+    return {'message': 'Rules combined', 'combined_rule_id': str(combined_rule_id)}
