@@ -1,4 +1,3 @@
-# app/main.py
 from fastapi import FastAPI, HTTPException
 from app.models import RuleInput, CombineRulesInput, EvaluateRuleInput
 from app.parser import parse_rule
