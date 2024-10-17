@@ -1,4 +1,3 @@
-# app/parser.py
 from lark import Lark, Transformer, v_args
 
 grammar = """
